@@ -27,7 +27,7 @@
     </div>
     <div class="col-md-6">
       <h3>Sign In</h3>
-      <form action="#" method="post">
+      <form action="{{ route('signin') }}" method="post">
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" name="email" class="form-control" id="email" placeholder="Email">
@@ -36,6 +36,7 @@
           <label for="password">Password</label>
           <input type="password" name="password" class="form-control" id="password" placeholder="Password">
         </div>
+        <input type="hidden" name="_token" value="{{ Session::token() }}">
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
