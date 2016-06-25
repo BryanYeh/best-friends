@@ -5,15 +5,7 @@
 @endsection
 
 @section('content')
-<div class="row">
-   <div class="col-xs-12">
-       <ul>
-         @foreach($errors->all() as $error)
-             <li>{{ $error }}</li>
-         @endforeach
-       </ul>
-   </div>
-</div>
+   @include('includes.message-block')
   <div class="row">
     <div class="col-md-6">
       <h3>Register</h3>
