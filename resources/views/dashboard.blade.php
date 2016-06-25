@@ -29,9 +29,12 @@
                </div>
                <div class="interaction">
                   <a href="#">Like</a> |
-                  <a href="#">Dislike</a> |
+                  <a href="#">Dislike</a>
+                  @if(Auth::user() == $post->user)
+                  |
                   <a href="#">Edit</a> |
                   <a href="{{ route('post.delete',['post_id' => $post->id]) }}">Delete</a>
+                  @endif
                </div>
             </article>
          @endforeach
