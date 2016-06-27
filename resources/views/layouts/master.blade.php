@@ -10,5 +10,10 @@
         <div class="container">
             @yield('content')
         </div>
+
+        <script src="{{ URL::to('src/js/jquery-1.12.4.min.js') }}"></script>
+        <script src="{{ URL::to('src/js/bootstrap.min.js') }}"></script>
+        <script src="{{ URL::to('src/js/app.js') }}"></script>
     </body>
+
 </html>
