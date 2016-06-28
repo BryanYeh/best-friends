@@ -1,8 +1,10 @@
 var postId = 0;
+postBodyElement = null;
 
 $('.edit-link').on('click', function(event){
    event.preventDefault();
-   var postBody = event.target.parentNode.parentNode.childNodes[1].textContent;
+   postBodyElement = event.target.parentNode.parentNode.childNodes[1];
+   var postBody = postBodyElement.textContent;
    postId = event.target.parentNode.parentNode.dataset['postid'];
    $('#post-body').val(postBody);
    $('#edit-modal').modal();
@@ -15,6 +17,7 @@ $('#modal-save').on('click', function(){
       data: { body: $('#post-body').val(), postId: postId, _token: token}
    })
    .done(function(msg){
-      console.log(msg['message']);
+      $(postBodyElement).text(msg['new-body']);
+      $('#edit-modal').modal('hide');
    });
 });
