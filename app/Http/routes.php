@@ -38,6 +38,18 @@ Route::get('/dashboard', [
   'middleware' => 'auth'
 ]);
 
+Route::get('/account', [
+   'uses' => 'UserController@getAccount',
+   'as' => 'account',
+   'middleware' => 'auth'
+]);
+
+Route::post('/updateaccount',[
+   'uses' => 'UserController@postSaveAccount',
+   'as' => 'account.save',
+   'middleware' => 'auth'
+]);
+
 Route::post('/createpost', [
    'uses' => 'PostController@postCreatePost',
    'as' => 'post.create',
