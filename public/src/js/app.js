@@ -32,6 +32,13 @@ $('.like').on('click', function(event){
       data: {isLike: isLike, postId: postId, _token: token}
    })
    .done(function(){
-
+      event.target.innerText = isLike ? event.target.innerText == 'Like' ? 'You like this post' : 'Like'
+         : event.target.innerText == 'Hate' ? 'You hate this post' : 'Hate';
+      if(isLike){
+         event.target.nextElementSibling.innerText = 'Hate';
+      }
+      else{
+         event.target.previousElementSibling.innerText = 'Like';
+      }
    });
 });
