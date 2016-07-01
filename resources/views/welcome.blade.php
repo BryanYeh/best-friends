@@ -23,7 +23,7 @@
           <label for="password">Password</label>
           <input type="password" name="password" class="form-control" id="password">
         </div>
-        <input type="hidden" name="_token" value="{{ Session::token() }}">
+        {{ csrf_field() }}
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
@@ -39,7 +39,7 @@
           <label for="password">Password</label>
           <input type="password" name="password" class="form-control" id="password" placeholder="Password">
         </div>
-        <input type="hidden" name="_token" value="{{ Session::token() }}">
+        {{ csrf_field() }}
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>

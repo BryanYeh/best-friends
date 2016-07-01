@@ -11,7 +11,7 @@
             <div class="form-group">
               <textarea class="form-control" name="body" id="body" rows="5" placeholder="Your Post"></textarea>
             </div>
-            <input type="hidden" value="{{ Session::token() }}" name="_token">
+            {{ csrf_field() }}
             <button type="submit" name="submit" class="btn btn-primary">Create Post</button>
          </form>
       </div>
@@ -66,7 +66,7 @@
    </div>
 
    <script>
-      var token = '{{ Session::token() }}';
+      var token = '{{ csrf_token() }}';
       var urlEdit = '{{ route('edit') }}';
       var urlLike = '{{ route('like') }}';
    </script>

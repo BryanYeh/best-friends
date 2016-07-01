@@ -14,7 +14,7 @@ class UserController extends Controller
    public function postSignUp(Request $request)
    {
       $this->validate($request, [
-         'email' => 'required|email|unique:users',
+         'email' => 'required|email|max:255|unique:users',
          'first_name' => 'required|max:120',
          'password' => 'required|min:4'
       ]);
@@ -41,7 +41,7 @@ class UserController extends Controller
       'password' => 'required'
     ]);
    if(Auth::attempt(['email'=>$request['email'],'password'=>$request['password']])){
-      return redirect()->route('dashboard');
+      return redirect()->intended('dashboard');
    }
    return redirect()->back();
   }
@@ -60,11 +60,13 @@ class UserController extends Controller
    public function postSaveAccount(Request $request)
    {
      $this->validate($request, [
-        'first_name' => 'required|max:120'
+        'first_name' => 'required|max:120',
+        'last_name' => 'max:120'
      ]);
 
      $user = Auth::user();
      $user->first_name = $request['first_name'];
+     $user->last_name = $request['last_name'];
      $user->update();
 
      $file = $request->file('image');

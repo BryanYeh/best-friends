@@ -16,12 +16,15 @@
               <input type="text" class="form-control" name="first_name" id="first_name" value="{{ $user->first_name }}">
             </div>
             <div class="form-group">
+              <label for="last_name">Last Name</label>
+              <input type="text" class="form-control" name="last_name" id="last_name" value="{{ $user->last_name }}">
+            </div>
+            <div class="form-group">
               <label for="image">Profile Picture</label>
               <input type="file" name="image" id="image" class="form-control">
             </div>
             <input type="hidden" name="_token" value="{{ Session::token() }}">
             <button type="submit" class="btn btn-primary">Save Account</button>
-
          </form>
       </div>
    </section>
