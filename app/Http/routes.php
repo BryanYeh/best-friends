@@ -51,23 +51,35 @@ Route::group(['middleware' => ['auth']], function () {
       'uses' => 'PostController@postLikePost',
       'as' => 'like'
    ]);
+
+   Route::get('/userimage/{filename}', [
+      'uses' => 'UserController@getUserImage',
+      'as' => 'account.image'
+   ]);
+
+   Route::get('/find-friends', [
+      'uses' => 'FriendController@getUsers',
+      'as' => 'friend-find'
+   ]);
+
+   Route::post('/request',[
+      'uses' => 'FriendController@requestFriend',
+      'as' => 'friend-request'
+   ]);
 });
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::group(['middleware' => ['guest']], function () {
+   Route::get('/', function () {
+       return view('welcome');
+   })->name('home');
 
-Route::post('/signup',[
-  'uses'=> 'UserController@postSignUp',
-  'as' => 'signup'
-]);
+   Route::post('/signup',[
+     'uses'=> 'UserController@postSignUp',
+     'as' => 'signup'
+   ]);
 
-Route::post('/signin',[
-  'uses'=> 'UserController@postSignIn',
-  'as' => 'signin'
-]);
-
-Route::get('/userimage/{filename}', [
-   'uses' => 'UserController@getUserImage',
-   'as' => 'account.image'
-]);
+   Route::post('/signin',[
+     'uses'=> 'UserController@postSignIn',
+     'as' => 'signin'
+   ]);
+});
