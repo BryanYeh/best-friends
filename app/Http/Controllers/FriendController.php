@@ -9,14 +9,68 @@ use Illuminate\Support\Facades\Auth;
 
 class FriendController extends Controller
 {
-   public function getUsers()
+   protected function addToList($list,$email,$first_name,$last_name,$status)
    {
-      $users = User::where('active',true)->where('id', '!=' , Auth::user()->id)->get();
-      return view('find_friend', ['users' => $users]);
+      if ($email != Auth::user()->email){
+         if (!key_exists($email, $list)) {
+            $list[$email] = array('first_name' => $first_name,
+                'last_name' => $last_name,
+                'status' => $status);
+         } else {
+            if ($list[$email]['status'] == "request") {
+               $list[$email] = array('first_name' => $first_name,
+                   'last_name' => $last_name,
+                   'status' => $status);
+            }
+         }
+      }
+      return $list;
    }
 
-   public function requestFriend()
+   public function getUsers()
    {
-      
+      $usersList = array();
+      $users = User::where('active',true)->get();
+      $userList = array();
+
+      foreach ($users as $user) {
+         if(!$user->friends->isEmpty()){
+            foreach($user->friends as $friend){
+               if($friend->pivot->accepted)
+                  if($user->email == Auth::user()->email)
+                     $userList =  $this->addToList($userList,$friend->email,$friend->first_name,$friend->last_name,'already');
+               elseif (!$friend->pivot->accepted && $user->email == Auth::user()->email)
+                  $userList =  $this->addToList($userList,$friend->email,$friend->first_name,$friend->last_name,'pending');
+               elseif(!$friend->pivot->accepted && $friend->email == Auth::user()->email)
+                  $userList =  $this->addToList($userList,$user->email,$user->first_name,$user->last_name,'accept');
+               else
+                  $userList =  $this->addToList($userList,$friend->email,$friend->first_name,$friend->last_name,'request');
+            }
+         }
+         $userList = $this->addToList($userList, $user->email, $user->first_name, $user->last_name, 'request');
+      }
+
+      return view('find_friend' , ['users' => $userList]);
+   }
+
+   public function requestFriend(Request $request)
+   {
+      $this->validate($request, [
+         'email' => 'required|email',
+         'uid' => 'required|numeric'
+      ]);
+
+      $email = $request['email'];
+      $user_id = $request['uid'];
+
+      $user = User::where('email',$email)->where('id',$user_id)->first();
+
+      if(!$user){
+         return redirect()->back()->with(['meesage'=>'User not found']);
+      }
+
+      if(Auth::user()->id == $user_id || Auth::user()->email == $email){
+         return redirect()->back()->with(['meesage'=>'Stop trying to friend yourself']);
+      }
    }
 }

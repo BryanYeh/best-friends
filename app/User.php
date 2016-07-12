@@ -19,5 +19,18 @@ class User extends Model implements Authenticatable
       return $this->hasMany('App\Like');
    }
 
-   
+   public function friends()
+   {
+      return $this->belongsToMany('App\User', 'friends', 'user_id', 'friend_id')->withPivot('accepted');
+   }
+
+   public function realFriends()
+   {
+      return $this->belongsToMany('App\User', 'friends', 'user_id', 'friend_id')->wherePivot('accepted', true);
+   }
+
+   public function pendingFriends()
+   {
+      return $this->belongsToMany('App\User', 'friends', 'user_id', 'friend_id')->wherePivot('accepted', false);
+   }
 }

@@ -5,9 +5,12 @@
 @endsection
 
 @section('content')
-   @foreach($users as $user)
+   @foreach($users as $email => $value)
       <p>
-         {{ $user->first_name }} {{ $user->last_name }} - {{ $user->id }}
+         {{ $email }}
+         {{ $value['first_name'] }}
+         {{ $value['last_name'] }}
+         {{ $value['status'] }}
       </p>
    @endforeach
 @endsection
