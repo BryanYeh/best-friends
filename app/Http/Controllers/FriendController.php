@@ -36,9 +36,10 @@ class FriendController extends Controller
       foreach ($users as $user) {
          if(!$user->friends->isEmpty()){
             foreach($user->friends as $friend){
-               if($friend->pivot->accepted)
-                  if($user->email == Auth::user()->email)
-                     $userList =  $this->addToList($userList,$friend->email,$friend->first_name,$friend->last_name,'already');
+               if($friend->pivot->accepted) {
+                  if ($user->email == Auth::user()->email)
+                     $userList = $this->addToList($userList, $friend->email, $friend->first_name, $friend->last_name, 'already');
+               }
                elseif (!$friend->pivot->accepted && $user->email == Auth::user()->email)
                   $userList =  $this->addToList($userList,$friend->email,$friend->first_name,$friend->last_name,'pending');
                elseif(!$friend->pivot->accepted && $friend->email == Auth::user()->email)
@@ -56,20 +57,18 @@ class FriendController extends Controller
    public function requestFriend(Request $request)
    {
       $this->validate($request, [
-         'email' => 'required|email',
-         'uid' => 'required|numeric'
+         'email' => 'required|email'
       ]);
 
       $email = $request['email'];
-      $user_id = $request['uid'];
 
-      $user = User::where('email',$email)->where('id',$user_id)->first();
+      $user = User::where('email',$email)->where('active',true)->first();
 
       if(!$user){
          return redirect()->back()->with(['meesage'=>'User not found']);
       }
 
-      if(Auth::user()->id == $user_id || Auth::user()->email == $email){
+      if(Auth::user()->email == $email){
          return redirect()->back()->with(['meesage'=>'Stop trying to friend yourself']);
       }
    }
