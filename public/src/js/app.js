@@ -30,8 +30,7 @@ $('.like').on('click', function(event){
       method: 'POST',
       url: urlLike,
       data: {isLike: isLike, postId: postId, _token: token}
-   })
-   .done(function(){
+   }).done(function(){
       event.target.innerText = isLike ? event.target.innerText == 'Like' ? 'You like this post' : 'Like'
          : event.target.innerText == 'Hate' ? 'You hate this post' : 'Hate';
       if(isLike){
@@ -40,5 +39,19 @@ $('.like').on('click', function(event){
       else{
          event.target.previousElementSibling.innerText = 'Like';
       }
+   });
+});
+
+$('.cancelRequest').on('click', function(event) {
+   event.preventDefault();
+   var email = event.target.parentNode.dataset['friendemail'];
+   $.ajax({
+      method: 'POST',
+      url: urlCancelRequest,
+      data: {email: email, _token: token}
+   }).success(function () {
+      console.log(event.target.textContent);
+      $(event.target).removeClass('cancelRequest').addClass('request');
+      event.target.textContent = 'Request Friend';
    });
 });

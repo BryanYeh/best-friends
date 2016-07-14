@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class FriendController extends Controller
 {
@@ -54,8 +55,9 @@ class FriendController extends Controller
       return view('find_friend' , ['users' => $userList]);
    }
 
-   public function requestFriend(Request $request)
+   public function request(Request $request)
    {
+      //TODO:: finish friend request
       $this->validate($request, [
          'email' => 'required|email'
       ]);
@@ -71,5 +73,42 @@ class FriendController extends Controller
       if(Auth::user()->email == $email){
          return redirect()->back()->with(['meesage'=>'Stop trying to friend yourself']);
       }
+   }
+
+   public function cancel(Request $request)
+   {
+      $this->validate($request,[
+         'email' => 'required|email'
+      ]);
+
+      $email = $request['email'];
+
+      $user = User::where('email',$email)->where('active',true)->first();
+      if($user) {
+         $test1 = DB::table('friends')
+             ->where('user_id', $user->id)
+             ->where('friend_id', Auth::user()->id)
+             ->first();
+         $test2 = DB::table('friends')
+             ->where('user_id', Auth::user()->id)
+             ->where('friend_id', $user->id)
+             ->first();
+
+         if ($test1) {
+            DB::table('friends')
+                ->where('user_id', $user->id)
+                ->where('friend_id', Auth::user()->id)
+                ->delete();
+            return response()->json(['message' => 'Canceled Request'], 200);
+         } elseif ($test2) {
+            DB::table('friends')
+                ->where('user_id', Auth::user()->id)
+                ->where('friend_id', $user->id)->delete();
+            return response()->json(['message' => 'Canceled Request'], 200);
+         } else
+            return response()->json(['message' => 'No such request'], 400);
+      }
+      else
+         return response()->json(['message' => 'User doesn\'t exist'], 400);
    }
 }

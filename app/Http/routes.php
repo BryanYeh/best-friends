@@ -62,9 +62,28 @@ Route::group(['middleware' => ['auth']], function () {
       'as' => 'friend-find'
    ]);
 
-   Route::post('/request',[
-      'uses' => 'FriendController@requestFriend',
+   Route::post('/request-friend',[
+      'uses' => 'FriendController@request',
       'as' => 'friend-request'
+   ]);
+
+   Route::post('/cancel-friend',[
+       'uses' => 'FriendController@cancel',
+       'as' => 'friend-cancel'
+   ]);
+   
+   Route::post('/unfriend-friend',[
+       'uses' => 'FriendController@unfriend',
+       'as' => 'friend-destroy'
+   ]);
+
+   Route::post('/decline-friend',[
+       'uses' => 'FriendController@decline',
+       'as' => 'friend-decline'
+   ]);
+   Route::post('/accept-friend',[
+       'uses' => 'FriendController@accept',
+       'as' => 'friend-accept'
    ]);
 });
 
