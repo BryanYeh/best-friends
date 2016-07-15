@@ -6,14 +6,14 @@ Followed [youtube](https://www.youtube.com/watch?v=_dd4-HEPejU&list=PL55RiY5tL51
     - [x] Create Account
     - [x] Login
     - [x] Logout
-    - []  Activation email
-    - []  Reset password
+    - [ ] Activation email
+    - [ ] Reset password
 - [x] Update Account
 - [ ] Friends
     - [x] Decline Request
-    - [] Send Request
-    - [] Accept Request
-    - [] Unfriend
+    - [ ] Send Request
+    - [ ] Accept Request
+    - [ ] Unfriend
 - [ ] Facebook Theme
     - [x] Home page
     - [ ] Other pages
