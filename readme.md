@@ -1,6 +1,27 @@
-# Laravel PHP Framework - Social Network
+# Best Friends - Laravel 5.2 Social Network
 
-Just following an example of building social network with Laravel
+Followed [youtube](https://www.youtube.com/watch?v=_dd4-HEPejU&list=PL55RiY5tL51oloSGk5XdO2MGjPqc0BxGV) videos, then customized it
 
-## Youtube Video
-https://www.youtube.com/watch?v=_dd4-HEPejU&list=PL55RiY5tL51oloSGk5XdO2MGjPqc0BxGV
+- []  Auth
+    - [x] Create Account
+    - [x] Login
+    - [x] Logout
+    - []  Activation email
+    - []  Reset password
+- [x] Update Account
+- []  Friends
+    - [x] Decline Request
+    - [] Send Request
+    - [] Accept Request
+    - [] Unfriend
+- []  Facebook Theme
+    - [x] Home page
+    - []  Other pages
+- []  Posts
+    - [x] Add
+    - [x] Like/Unlike
+    - [x] Hate/Unhate
+    - [x] Edit
+    - [x] Delete
+    - []  Comment
+- []  Other stuff
