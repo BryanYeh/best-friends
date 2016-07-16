@@ -1,3 +1,5 @@
+/* Post */
+
 var postId = 0;
 postBodyElement = null;
 
@@ -42,6 +44,10 @@ $('.like').on('click', function(event){
    });
 });
 
+
+/* Friends */
+
+// Friend request cancel
 $('.cancelRequest').on('click', function(event) {
    event.preventDefault();
    var email = event.target.parentNode.dataset['friendemail'];
@@ -53,5 +59,20 @@ $('.cancelRequest').on('click', function(event) {
       console.log(event.target.textContent);
       $(event.target).removeClass('cancelRequest').addClass('request');
       event.target.textContent = 'Request Friend';
+   });
+});
+
+// Friend request
+$('.request').on('click', function (event) {
+   event.preventDefault();
+   var email = event.target.parentNode.dataset['friendemail'];
+   $.ajax({
+      method: 'POST',
+      url: urlRequest,
+      data: {email: email, _token: token}
+   }).success(function () {
+      console.log(event.target.textContent);
+      $(event.target).removeClass('request').addClass('cancelRequest');
+      event.target.textContent = 'Cancel Friend Request';
    });
 });

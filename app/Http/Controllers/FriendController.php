@@ -66,13 +66,14 @@ class FriendController extends Controller
 
       $user = User::where('email',$email)->where('active',true)->first();
 
-      if(!$user){
-         return redirect()->back()->with(['meesage'=>'User not found']);
+      if (!$user || Auth::user()->email == $email) {
+         return redirect()->back();
       }
 
-      if(Auth::user()->email == $email){
-         return redirect()->back()->with(['meesage'=>'Stop trying to friend yourself']);
-      }
+      DB::table('friends')
+          ->insert(
+              ['user_id' => Auth::user()->id, 'friend_id' => $user->id, 'accepted' => false]
+          );
    }
 
    public function cancel(Request $request)

@@ -10,8 +10,9 @@ Followed [youtube](https://www.youtube.com/watch?v=_dd4-HEPejU&list=PL55RiY5tL51
     - [ ] Reset password
 - [x] Update Account
 - [ ] Friends
+    - [x] Cancel Request
+    - [x] Send Request
     - [x] Decline Request
-    - [ ] Send Request
     - [ ] Accept Request
     - [ ] Unfriend
 - [ ] Facebook Theme

@@ -21,7 +21,8 @@
                 <li class="list-group-item">Update Account</li>
                 <li class="list-group-item">Friends
                     <ul class="list-group">
-                        <li class="list-group-item">Decline Request</li>
+                        <li class="list-group-item">Send Request</li>
+                        <li class="list-group-item">Cancel Request</li>
                     </ul>
                 </li>
                 <li class="list-group-item">Facebook Theme
