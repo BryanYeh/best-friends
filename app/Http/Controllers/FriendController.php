@@ -55,9 +55,14 @@ class FriendController extends Controller
       return view('find_friend' , ['users' => $userList]);
    }
 
+
+   /**
+    * Friend Request
+    * @param Request $request
+    * @return \Illuminate\Http\RedirectResponse
+    */
    public function request(Request $request)
    {
-      //TODO:: finish friend request
       $this->validate($request, [
          'email' => 'required|email'
       ]);
@@ -72,10 +77,20 @@ class FriendController extends Controller
 
       DB::table('friends')
           ->insert(
-              ['user_id' => Auth::user()->id, 'friend_id' => $user->id, 'accepted' => false]
+              ['user_id' => Auth::user()->id,
+                  'friend_id' => $user->id,
+                  'accepted' => false,
+                  'created_at' => DB::raw('CURRENT_TIMESTAMP'),
+                  'updated_at' => DB::raw('CURRENT_TIMESTAMP')]
           );
    }
 
+
+   /**
+    * Cancel Friend Request
+    * @param Request $request
+    * @return \Illuminate\Http\JsonResponse
+    */
    public function cancel(Request $request)
    {
       $this->validate($request,[
@@ -86,22 +101,12 @@ class FriendController extends Controller
 
       $user = User::where('email',$email)->where('active',true)->first();
       if($user) {
-         $test1 = DB::table('friends')
-             ->where('user_id', $user->id)
-             ->where('friend_id', Auth::user()->id)
-             ->first();
-         $test2 = DB::table('friends')
+         $check = DB::table('friends')
              ->where('user_id', Auth::user()->id)
              ->where('friend_id', $user->id)
              ->first();
 
-         if ($test1) {
-            DB::table('friends')
-                ->where('user_id', $user->id)
-                ->where('friend_id', Auth::user()->id)
-                ->delete();
-            return response()->json(['message' => 'Canceled Request'], 200);
-         } elseif ($test2) {
+         if ($check) {
             DB::table('friends')
                 ->where('user_id', Auth::user()->id)
                 ->where('friend_id', $user->id)->delete();
@@ -111,5 +116,108 @@ class FriendController extends Controller
       }
       else
          return response()->json(['message' => 'User doesn\'t exist'], 400);
+   }
+
+   /**
+    * Accept Request
+    * @param Request $request
+    * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+    */
+   public function accept(Request $request)
+   {
+      $this->validate($request, [
+          'email' => 'required|email'
+      ]);
+
+      $email = $request['email'];
+
+      $users = User::where('active', true)->where('email', $email)->first();
+
+      if ($users) {
+         $update = DB::table('friends')
+             ->where('user_id', $users->id)
+             ->where('friend_id', Auth::user()->id)
+             ->update(['accepted' => true, 'updated_at' => DB::raw('CURRENT_TIMESTAMP')]);
+
+         if ($update) {
+            DB::table('friends')
+                ->insert(
+                    ['user_id' => Auth::user()->id,
+                        'friend_id' => $users->id,
+                        'accepted' => true,
+                        'created_at' => DB::raw('CURRENT_TIMESTAMP'),
+                        'updated_at' => DB::raw('CURRENT_TIMESTAMP')]
+                );
+            return response("", 200);
+         } else {
+            return response("", 400);
+         }
+      } else {
+         return response("", 400);
+      }
+   }
+
+   /**
+    * Decline Friend Request
+    * @param Request $request
+    * @return \Illuminate\Http\JsonResponse
+    */
+   public function decline(Request $request)
+   {
+      $this->validate($request, [
+          'email' => 'required|email'
+      ]);
+
+      $email = $request['email'];
+
+      $user = User::where('email', $email)->where('active', true)->first();
+      if ($user) {
+         $check = DB::table('friends')
+             ->where('user_id', $user->id)
+             ->where('friend_id', Auth::user()->id)
+             ->first();
+
+         if ($check) {
+            DB::table('friends')
+                ->where('user_id', $user->id)
+                ->where('friend_id', Auth::user()->id)->delete();
+            return response()->json(['message' => 'Declined Request'], 200);
+         } else
+            return response()->json(['message' => 'No such request'], 400);
+      } else
+         return response()->json(['message' => 'User doesn\'t exist'], 400);
+   }
+
+   public function unfriend(Request $request)
+   {
+      $this->validate($request, [
+          'email' => 'required|email'
+      ]);
+
+      $email = $request['email'];
+
+      $user = User::where('email', $email)->where('active', true)->first();
+      if ($user) {
+         $check1 = DB::table('friends')
+             ->where('user_id', $user->id)
+             ->where('friend_id', Auth::user()->id)
+             ->first();
+         $check2 = DB::table('friends')
+             ->where('user_id', Auth::user()->id)
+             ->where('friend_id', $user->id)
+             ->first();
+
+         if ($check1 && $check2) {
+            DB::table('friends')
+                ->where('user_id', $user->id)
+                ->where('friend_id', Auth::user()->id)->delete();
+            DB::table('friends')
+                ->where('user_id', Auth::user()->id)
+                ->where('friend_id', $user->id)->delete();
+            return response()->json(['message' => 'Unfriended'], 200);
+         } else
+            return response()->json(['message' => 'No friend'], 400);
+      } else
+         return response()->json(['message' => 'Unable to unfriend'], 400);
    }
 }

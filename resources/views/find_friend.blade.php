@@ -12,7 +12,8 @@
          @elseif($value['status'] == 'pending')
             <a href="#" class="cancelRequest">Cancel Friend Request</a>
          @elseif($value['status'] == 'accept')
-            <a href="#" class="acceptRequest">Accept Friend Request</a> | <a href="#" class="status">Decline Friend Request</a>
+            <a href="#" class="acceptRequest">Accept Friend Request</a> | <a href="#" class="declineRequest">Decline
+               Friend Request</a>
          @else
             <a href="#" class="request">Request Friend</a>
          @endif

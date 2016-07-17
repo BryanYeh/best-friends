@@ -13,8 +13,9 @@ Followed [youtube](https://www.youtube.com/watch?v=_dd4-HEPejU&list=PL55RiY5tL51
     - [x] Cancel Request
     - [x] Send Request
     - [x] Decline Request
-    - [ ] Accept Request
-    - [ ] Unfriend
+    - [x] Accept Request
+    - [x] Unfriend
+    - [ ] Fix layout / theme
 - [ ] Facebook Theme
     - [x] Home page
     - [ ] Other pages

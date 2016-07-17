@@ -23,6 +23,9 @@
                     <ul class="list-group">
                         <li class="list-group-item">Send Request</li>
                         <li class="list-group-item">Cancel Request</li>
+                        <li class="list-group-item">Decline Request</li>
+                        <li class="list-group-item">Accept Request</li>
+                        <li class="list-group-item">Unfriend</li>
                     </ul>
                 </li>
                 <li class="list-group-item">Facebook Theme
