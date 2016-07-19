@@ -51,7 +51,7 @@ $(function () {
     // Friend request cancel
     $('.cancelRequest').on('click', function (event) {
         event.preventDefault();
-        var email = $(this).parent().attr('data-friendemail');
+        var email = $(this).parent().parent().attr('data-friendemail');
         $.ajax({
             method: 'POST',
             url: urlCancelRequest,
@@ -65,7 +65,7 @@ $(function () {
     // Friend request
     $('.request').click(function (event) {
         event.preventDefault();
-        var email = $(this).parent().attr('data-friendemail');
+        var email = $(this).parent().parent().attr('data-friendemail');
         $.ajax({
             method: 'POST',
             url: urlRequest,
@@ -79,7 +79,7 @@ $(function () {
     // Friend accept
     $('.acceptRequest').click(function (event) {
         event.preventDefault();
-        var email = $(this).parent().attr('data-friendemail');
+        var email = $(this).parent().parent().attr('data-friendemail');
         $.ajax({
             method: 'POST',
             url: urlAccept,
@@ -94,7 +94,7 @@ $(function () {
     // Friend decline
     $('.declineRequest').click(function (event) {
         event.preventDefault();
-        var email = $(this).parent().attr('data-friendemail');
+        var email = $(this).parent().parent().attr('data-friendemail');
         $.ajax({
             method: 'POST',
             url: urlDecline,
@@ -109,7 +109,7 @@ $(function () {
     // Friend remove
     $('.destroyFriendship').click(function (event) {
         event.preventDefault();
-        var email = $(this).parent().attr('data-friendemail');
+        var email = $(this).parent().parent().attr('data-friendemail');
         $.ajax({
             method: 'POST',
             url: urlUnfriend,

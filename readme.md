@@ -1,4 +1,4 @@
-# Best Friends - Laravel 5.2 Social Network
+# Best Friends - Laravel 5.2 Social Network (Facebook)
 
 Followed [youtube](https://www.youtube.com/watch?v=_dd4-HEPejU&list=PL55RiY5tL51oloSGk5XdO2MGjPqc0BxGV) videos, then customized it
 
@@ -9,13 +9,7 @@ Followed [youtube](https://www.youtube.com/watch?v=_dd4-HEPejU&list=PL55RiY5tL51
     - [ ] Activation email
     - [ ] Reset password
 - [x] Update Account
-- [ ] Friends
-    - [x] Cancel Request
-    - [x] Send Request
-    - [x] Decline Request
-    - [x] Accept Request
-    - [x] Unfriend
-    - [ ] Fix layout / theme
+- [x] Friends
 - [ ] Facebook Theme
     - [x] Home page
     - [ ] Other pages
