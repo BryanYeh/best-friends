@@ -12,93 +12,112 @@
 */
 
 Route::group(['middleware' => ['auth']], function () {
-   Route::get('/logout', [
-      'uses' => 'UserController@getLogout',
-      'as' => 'logout'
-   ]);
+    Route::get('/home', [
+        'uses' => 'PostController@getDashboard'
+    ]);
 
-   Route::get('/dashboard', [
-     'uses'=> 'PostController@getDashboard',
-     'as' => 'dashboard'
-   ]);
+    Route::get('/logout', [
+        'uses' => 'UserController@getLogout',
+        'as' => 'logout'
+    ]);
 
-   Route::get('/account', [
-      'uses' => 'UserController@getAccount',
-      'as' => 'account'
-   ]);
+    Route::get('/dashboard', [
+        'uses' => 'PostController@getDashboard',
+        'as' => 'dashboard'
+    ]);
 
-   Route::post('/updateaccount',[
-      'uses' => 'UserController@postSaveAccount',
-      'as' => 'account.save'
-   ]);
+    Route::get('/account', [
+        'uses' => 'UserController@getAccount',
+        'as' => 'account'
+    ]);
 
-   Route::post('/createpost', [
-      'uses' => 'PostController@postCreatePost',
-      'as' => 'post.create'
-   ]);
+    Route::post('/updateaccount', [
+        'uses' => 'UserController@postSaveAccount',
+        'as' => 'account.save'
+    ]);
 
-   Route::get('/delete-post/{post_id}',[
-      'uses' => 'PostController@getDeletePost',
-      'as' => 'post.delete'
-   ]);
+    Route::post('/createpost', [
+        'uses' => 'PostController@postCreatePost',
+        'as' => 'post.create'
+    ]);
 
-   Route::post('/edit', [
-      'uses' => 'PostController@postEditPost',
-      'as' => 'edit'
-   ]);
+    Route::get('/delete-post/{post_id}', [
+        'uses' => 'PostController@getDeletePost',
+        'as' => 'post.delete'
+    ]);
 
-   Route::post('/like', [
-      'uses' => 'PostController@postLikePost',
-      'as' => 'like'
-   ]);
+    Route::post('/edit', [
+        'uses' => 'PostController@postEditPost',
+        'as' => 'edit'
+    ]);
 
-   Route::get('/userimage/{filename}', [
-      'uses' => 'UserController@getUserImage',
-      'as' => 'account.image'
-   ]);
+    Route::post('/like', [
+        'uses' => 'PostController@postLikePost',
+        'as' => 'like'
+    ]);
 
-   Route::get('/find-friends', [
-      'uses' => 'FriendController@getUsers',
-      'as' => 'friend-find'
-   ]);
+    Route::get('/userimage/{filename}', [
+        'uses' => 'UserController@getUserImage',
+        'as' => 'account.image'
+    ]);
 
-   Route::post('/request-friend',[
-      'uses' => 'FriendController@request',
-      'as' => 'friend-request'
-   ]);
+    Route::get('/find-friends', [
+        'uses' => 'FriendController@getUsers',
+        'as' => 'friend-find'
+    ]);
 
-   Route::post('/cancel-friend',[
-       'uses' => 'FriendController@cancel',
-       'as' => 'friend-cancel'
-   ]);
-   
-   Route::post('/unfriend-friend',[
-       'uses' => 'FriendController@unfriend',
-       'as' => 'friend-destroy'
-   ]);
+    Route::post('/request-friend', [
+        'uses' => 'FriendController@request',
+        'as' => 'friend-request'
+    ]);
 
-   Route::post('/decline-friend',[
-       'uses' => 'FriendController@decline',
-       'as' => 'friend-decline'
-   ]);
-   Route::post('/accept-friend',[
-       'uses' => 'FriendController@accept',
-       'as' => 'friend-accept'
-   ]);
+    Route::post('/cancel-friend', [
+        'uses' => 'FriendController@cancel',
+        'as' => 'friend-cancel'
+    ]);
+
+    Route::post('/unfriend-friend', [
+        'uses' => 'FriendController@unfriend',
+        'as' => 'friend-destroy'
+    ]);
+
+    Route::post('/decline-friend', [
+        'uses' => 'FriendController@decline',
+        'as' => 'friend-decline'
+    ]);
+    Route::post('/accept-friend', [
+        'uses' => 'FriendController@accept',
+        'as' => 'friend-accept'
+    ]);
 });
 
 Route::group(['middleware' => ['guest']], function () {
-   Route::get('/', function () {
-       return view('welcome');
-   })->name('home');
+    Route::get('/{home?}', function () {
+        return view('welcome');
+    })->name('home');
 
-   Route::post('/signup',[
-     'uses'=> 'UserController@postSignUp',
-     'as' => 'signup'
-   ]);
+    Route::post('/signup', [
+        'uses' => 'UserController@postSignUp',
+        'as' => 'signup'
+    ]);
 
-   Route::post('/signin',[
-     'uses'=> 'UserController@postSignIn',
-     'as' => 'signin'
-   ]);
+    Route::post('/signin', [
+        'uses' => 'UserController@postSignIn',
+        'as' => 'signin'
+    ]);
+
+    Route::get('/password/reset/{token?}', [
+        'uses' => 'Auth\PasswordController@showResetForm',
+        'as' => 'reset-token'
+    ]);
+
+    Route::post('/password/email', [
+        'uses' => 'Auth\PasswordController@sendResetLinkEmail',
+        'as' => 'reset-send'
+    ]);
+
+    Route::post('/password/reset', [
+        'uses' => 'Auth\PasswordController@reset',
+        'as' => 'reset-password'
+    ]);
 });

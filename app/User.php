@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements Authenticatable
+class User extends Model implements Authenticatable, CanResetPasswordContract
 {
-   use \Illuminate\Auth\Authenticatable;
+   use \Illuminate\Auth\Authenticatable, CanResetPassword;
 
    public function posts()
    {
