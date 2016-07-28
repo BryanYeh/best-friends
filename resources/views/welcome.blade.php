@@ -15,7 +15,8 @@
                 <li class="list-group-item">Auth
                     <ul class="list-group">
                         <li class="list-group-item">Create Account</li>
-                        <li class="list-group-item">Login</li>
+                        <li class="list-group-item">Password Reset</li>
+                        <li class="list-group-item">Login/Logout</li>
                     </ul>
                 </li>
                 <li class="list-group-item">Update Account</li>

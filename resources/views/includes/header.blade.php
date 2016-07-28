@@ -1,7 +1,6 @@
 <header>
   <nav class="navbar navbar-default">
       <div class="container">
-      <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
@@ -12,7 +11,6 @@
           <a class="navbar-brand" href="{{ route('dashboard') }}">bestfriends</a>
       </div>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
          <ul class="nav navbar-nav navbar-right">
             @if(Auth::user())
@@ -25,18 +23,20 @@
               <form class="navbar-form form-inline navbar-right" action="{{ route('signin') }}" method="post">
                   <div class="form-group inline {{ $errors->login->has('email') ? 'has-error' : '' }}">
                       <label class="sr-only" for="email">Email</label>
-                      <input type="email" name="email" class="form-control" id="email" placeholder="Email"
+                      <input type="email" name="email" class="" id="email" placeholder="Email"
                              value="{{ Request::old('email') }}">
                   </div>
                   <div class="form-group {{ $errors->login->has('password') ? 'has-error' : '' }}">
                       <label class="sr-only" for="password">Password</label>
-                      <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                      <input type="password" name="password" class="" id="password" placeholder="Password">
                   </div>
                   {{ csrf_field() }}
-                  <button type="submit" class="btn btn-primary">Log in</button>
+                  <button type="submit" class="btn-primary">Log in</button>
+                  <a href="{{ route('reset-token') }}" class="btn btn-link">Forgot password?</a>
               </form>
+
           @endif
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+      </div>
+    </div>
   </nav>
 </header>
