@@ -6,8 +6,9 @@ Followed [youtube](https://www.youtube.com/watch?v=_dd4-HEPejU&list=PL55RiY5tL51
     - [x] Create Account
     - [x] Login
     - [x] Logout
-    - [ ] Activation email
+    - [x] Activation email
     - [x] Reset password
+    - [ ] Remember Me
 - [x] Update Account
 - [x] Friends
 - [ ] Facebook Theme

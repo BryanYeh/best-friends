@@ -17,6 +17,7 @@
                         <li class="list-group-item">Create Account</li>
                         <li class="list-group-item">Password Reset</li>
                         <li class="list-group-item">Login/Logout</li>
+                        <li class="list-group-item">Account Activation</li>
                     </ul>
                 </li>
                 <li class="list-group-item">Update Account</li>
@@ -33,6 +34,20 @@
             <h3>
                 <small>It's a copy and always will be.</small>
             </h3>
+            @if(Session::has('success-message'))
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="alert alert-success" role="alert">{{ Session::get('success-message') }}</div>
+                    </div>
+                </div>
+            @endif
+            @if(Session::has('warning-message'))
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="alert alert-warning" role="alert">{{ Session::get('warning-message') }}</div>
+                    </div>
+                </div>
+            @endif
             <hr/>
             <form action="{{ route('signup') }}" method="post">
                 <div class="row">

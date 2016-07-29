@@ -120,4 +120,9 @@ Route::group(['middleware' => ['guest']], function () {
         'uses' => 'Auth\PasswordController@reset',
         'as' => 'reset-password'
     ]);
+
+    Route::get('/user/activation/{token}', [
+        'uses' => 'UserController@userActivation',
+        'as' => 'account-activate'
+    ]);
 });
