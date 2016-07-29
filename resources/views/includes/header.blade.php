@@ -30,6 +30,7 @@
                       <label class="sr-only" for="password">Password</label>
                       <input type="password" name="password" class="" id="password" placeholder="Password">
                   </div>
+                  <input type="checkbox" name="remember_me" id="remember_me">
                   {{ csrf_field() }}
                   <button type="submit" class="btn-primary">Log in</button>
                   <a href="{{ route('reset-token') }}" class="btn btn-link">Forgot password?</a>

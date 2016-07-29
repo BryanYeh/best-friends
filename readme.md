@@ -2,13 +2,13 @@
 
 Followed [youtube](https://www.youtube.com/watch?v=_dd4-HEPejU&list=PL55RiY5tL51oloSGk5XdO2MGjPqc0BxGV) videos, then customized it
 
-- [ ] Auth
+- [x] Auth
     - [x] Create Account
     - [x] Login
     - [x] Logout
     - [x] Activation email
     - [x] Reset password
-    - [ ] Remember Me
+    - [x] Remember Me
 - [x] Update Account
 - [x] Friends
 - [ ] Facebook Theme
