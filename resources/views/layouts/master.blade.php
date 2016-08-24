@@ -7,6 +7,8 @@
 
         <title>@yield('title')</title>
         <link rel="stylesheet" href="{{ URL::to('src/css/bootstrap.min.css') }}" media="screen" title="no title" charset="utf-8">
+        <link rel="stylesheet" href="{{ URL::to('src/css/simplemde.min.css') }}" media="screen" title="no title"
+              charset="utf-8">
         <link rel="stylesheet" href="{{ URL::to('src/css/main.css') }}" media="screen" title="no title" charset="utf-8">
         <link rel="stylesheet" href="{{ URL::to('src/css/style.css') }}" media="screen" title="no title" charset="utf-8">
 
@@ -19,7 +21,11 @@
 
         <script src="{{ URL::to('src/js/jquery-1.12.4.min.js') }}"></script>
         <script src="{{ URL::to('src/js/bootstrap.min.js') }}"></script>
+        <script src="{{ URL::to('src/js/simplemde.min.js') }}"></script>
         <script src="{{ URL::to('src/js/app.js') }}"></script>
+        <script>
+            var simplemde = new SimpleMDE({element: $("#body")[0]});
+        </script>
     </body>
 
 </html>

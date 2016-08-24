@@ -1,7 +1,12 @@
 @extends('layouts.master')
 
 @section('content')
-   @include('includes.message-block')
+
+
+    <div class="col-md-6 col-md-offset-3">
+        @include('includes.message-block')
+    </div>
+
    <section = "row new-post">
       <div class="col-md-6 col-md-offset-3">
          <header>
@@ -16,6 +21,7 @@
          </form>
       </div>
    </section>
+
    <section class="row posts">
       <div class="col-md-6 col-md-offset-3">
          <header>
@@ -23,7 +29,7 @@
          </header>
          @foreach($posts as $post)
             <article class="post" data-postid="{{ $post->id }}">
-               <p>{{ $post->body }}</p>
+                @markdown($post->body)
                <div class="info">
                   Posted by {{ $post->user->first_name }} on {{ $post->created_at }}
                </div>

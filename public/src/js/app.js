@@ -7,6 +7,7 @@ $(function () {
     $('.edit-link').on('click', function (event) {
         event.preventDefault();
         postBodyElement = event.target.parentNode.parentNode.childNodes[1];
+        console.log(postBodyElement);
         var postBody = postBodyElement.textContent;
         postId = event.target.parentNode.parentNode.dataset['postid'];
         $('#post-body').val(postBody);

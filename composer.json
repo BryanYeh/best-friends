@@ -1,12 +1,18 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "BryanYeh/best-friends",
+    "description": "Best Friends - Laravel 5.2 Social Network (Facebook).",
+    "keywords": [
+        "social network",
+        "laravel",
+        "facebook",
+        "best friends"
+    ],
     "license": "MIT",
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.2.*"
+        "laravel/framework": "5.2.*",
+        "andreasindal/laravel-markdown": "1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

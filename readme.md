@@ -15,7 +15,7 @@ Followed [youtube](https://www.youtube.com/watch?v=_dd4-HEPejU&list=PL55RiY5tL51
     - [x] Home page
     - [ ] Other pages
 - [ ] Posts
-    - [x] Add
+    - [x] Add (Markdown)
     - [x] Like/Unlike
     - [x] Hate/Unhate
     - [x] Edit
