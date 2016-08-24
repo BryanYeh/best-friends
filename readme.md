@@ -14,7 +14,7 @@ Followed [youtube](https://www.youtube.com/watch?v=_dd4-HEPejU&list=PL55RiY5tL51
 - [ ] Facebook Theme
     - [x] Home page
     - [ ] Other pages
-- [ ] Posts
+- [ ] Posts (Own and Friends)
     - [x] Add (Markdown)
     - [x] Like/Unlike
     - [x] Hate/Unhate

@@ -7,7 +7,7 @@
         @include('includes.message-block')
     </div>
 
-   <section = "row new-post">
+    <section class="row new-post">
       <div class="col-md-6 col-md-offset-3">
          <header>
             <h3>What do you have to say?</h3>
@@ -28,21 +28,14 @@
             <h3>Whatever people say...</h3>
          </header>
          @foreach($posts as $post)
-            <article class="post" data-postid="{{ $post->id }}">
-                @markdown($post->body)
-               <div class="info">
-                  Posted by {{ $post->user->first_name }} on {{ $post->created_at }}
-               </div>
-               <div class="interaction">
-                  <a href="#" class="like">{{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'You like this post' : 'Like' : 'Like'}}</a> |
-                  <a href="#" class="like">{{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 0 ? 'You hate this post' : 'Hate' : 'Hate'}}</a>
-                  @if(Auth::user() == $post->user)
-                  |
-                  <a class="edit-link" href="#">Edit</a> |
-                  <a href="{{ route('post.delete',['post_id' => $post->id]) }}">Delete</a>
+              @if($post->user()->first()->email == Auth::user()->email)
+                  @include('includes.post')
+              @endif
+              @foreach(Auth::user()->friends()->get() as $friend)
+                  @if($friend->pivot->friend_id == $post->user()->first()->id)
+                      @include('includes.post')
                   @endif
-               </div>
-            </article>
+              @endforeach
          @endforeach
 
       </div>
